@@ -5,7 +5,7 @@ export function smoothScroll() {
     refs.galleryDivEl.firstElementChild.getBoundingClientRect();
 
   window.scrollBy({
-    top: (cardHeight * 2 - 18),
+    top: (cardHeight * 2 + 10),
     behavior: 'smooth',
   });
 }
