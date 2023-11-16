@@ -11,8 +11,16 @@
   overflow: hidden;
 }
 
+.img-link {
+  display: block;
+  /* margin: 0;
+  padding: 0; */
+  height: 200px;
+}
+
 body {
-  scroll-behavior: smooth;
+  font-family: 'Montserrat', sans-serif;
+  /* scroll-behavior: smooth; */
   margin: 0;
   height: 100vh;
   letter-spacing: 0.04em;
@@ -66,6 +74,7 @@ body {
   cursor: pointer;
   color: inherit;
   color: rgba(255, 255, 255, 0.7);
+  font-family: 'Montserrat', sans-serif;
 }
 
 .search-btn:hover {
@@ -97,18 +106,19 @@ body {
 
 .photo-card img {
   width: 100%;
-  height: 200px;
+  height: 100%;
 }
 
 .photo-card {
   width: 280px;
   border: 1px solid #f4f4fd;
   box-shadow: 0px 1px 6px 0px rgba(46, 47, 66, 0.08);
+  background-color: rgba(76, 77, 106, 0.08);
 }
 
 .info {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   text-align: center;
   padding: 0 10px;
   font-size: 12px;

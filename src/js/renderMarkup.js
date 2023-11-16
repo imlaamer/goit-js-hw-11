@@ -1,9 +1,9 @@
 export function renderImages(hits) {
   return hits
     .map(
-      ({ webformatURL, tags, likes, views, comments, downloads }) => `
+      ({ webformatURL,largeImageURL, tags, likes, views, comments, downloads }) => `
       <div class="photo-card">
-        <img src="${webformatURL}" alt="${tags}" loading="lazy" />
+        <a href="${largeImageURL}" class='img-link'><img src="${webformatURL}" alt="${tags}" loading="lazy" /></a>
         <div class="info">
           <p class="info-item">
             <b>Likes: </b>${likes}
