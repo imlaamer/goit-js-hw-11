@@ -1,7 +1,6 @@
 import { refs } from './refs';
 import { Notify } from 'notiflix';
 
-
 //------------------------додати в ДОМ
 function appendMarkup(parentEl, markup) {
   parentEl.insertAdjacentHTML('beforeend', markup);
@@ -9,12 +8,11 @@ function appendMarkup(parentEl, markup) {
 
 //------------------------нотифікація
 function notifySuccess(totalHits) {
-    Notify.success(`Hooray! We found ${totalHits} images.`);
+  Notify.success(`Hooray! We found ${totalHits} images.`);
 }
 
-function notifyEndInfo(){
-    Notify.info( "We're sorry, but you've reached the end of search results.")
-   
+function notifyEndInfo() {
+  Notify.info("We're sorry, but you've reached the end of search results.");
 }
 
 function notifyNoImagesWarning() {
@@ -24,35 +22,42 @@ function notifyNoImagesWarning() {
 }
 
 function notifyFillWarning() {
-    Notify.warning('Please fill out the search field')
+  Notify.warning('Please fill out the search field');
 }
 
 function notifyFailure() {
-    Notify.failure('Oops! Something went wrong! Try reloading the page!');
+  Notify.failure('Oops! Something went wrong! Try reloading the page!');
 }
 
-//------------------------лоуд мор кнопка
+//------------------------лоуд кнопка
 
 function showLoadMore() {
-      refs.btnLoadMoreEl.classList.remove('visually-hidden');
+  refs.btnLoadMoreEl.classList.remove('visually-hidden');
 }
-
 
 function hideLoadMore() {
-    refs.btnLoadMoreEl.classList.add('visually-hidden');
+  refs.btnLoadMoreEl.classList.add('visually-hidden');
 }
 
-
-//------------------------бекдропg з лоудером
+//------------------------бекдроп з лоудером
 
 function showBackdropLoader() {
-        refs.backdropEl.classList.remove('visually-hidden');
+  refs.backdropEl.classList.remove('visually-hidden');
 }
 
-function hideBackdropLoader () {
-      refs.backdropEl.classList.add('visually-hidden');
+function hideBackdropLoader() {
+  refs.backdropEl.classList.add('visually-hidden');
 }
- 
 
-export { appendMarkup, notifySuccess, notifyNoImagesWarning, notifyFailure, notifyFillWarning, hideLoadMore, showLoadMore, showBackdropLoader, hideBackdropLoader,notifyEndInfo };
-// ??
+export {
+  appendMarkup,
+  notifySuccess,
+  notifyNoImagesWarning,
+  notifyFailure,
+  notifyFillWarning,
+  hideLoadMore,
+  showLoadMore,
+  showBackdropLoader,
+  hideBackdropLoader,
+  notifyEndInfo,
+};

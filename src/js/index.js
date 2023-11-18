@@ -16,15 +16,20 @@ import {
   showBackdropLoader,
   hideBackdropLoader,
   notifyEndInfo,
-} from './helpers';
+} from './helpers'; //
 
 const imageApi = new ImageApi();
+
+const lightbox = new SimpleLightbox('.gallery a', {
+  overlayOpacity: 0.7,
+  captionsData: 'alt',
+  captionDelay: 250,
+});
 
 //-------------------------------------------------
 async function onSubmit(e) {
   e.preventDefault();
   hideLoadMore();
-  // refs.searchQueryEl.disable = true;
   refs.galleryDivEl.innerHTML = '';
   if (refs.searchQueryEl.value.trim() === '') {
     return notifyFillWarning();
@@ -34,27 +39,17 @@ async function onSubmit(e) {
 
   try {
     const data = await imageApi.getImages();
-      hideBackdropLoader();
-      
+    hideBackdropLoader();
     if (data.hits.length === 0) {
-      notifyNoImagesWarning();
-      return;
+      return notifyNoImagesWarning();
     }
     if (imageApi.page === 1) {
       notifySuccess(data.totalHits);
     }
-
     const galleryMarkup = renderImages(data.hits);
     appendMarkup(refs.galleryDivEl, galleryMarkup);
-   
-//---
-    const lightbox = new SimpleLightbox('.gallery a', {
-      overlayOpacity: 0.7,
-      captionsData: 'alt',
-      captionDelay: 250,
-    });
     lightbox.refresh();
-//---
+
     if (data.totalHits === data.hits.length) {
       notifyEndInfo();
       hideLoadMore();
@@ -65,12 +60,8 @@ async function onSubmit(e) {
     notifyFailure();
     console.error(error.message);
   }
-    
-  //  refs.searchQueryEl.disable = false;
 }
 refs.formEl.addEventListener('submit', onSubmit);
-
-
 
 //-------------------------------------------
 async function onLoadMore() {
@@ -79,12 +70,11 @@ async function onLoadMore() {
     const data = await imageApi.getImages();
     const galleryMarkup = renderImages(data.hits);
     appendMarkup(refs.galleryDivEl, galleryMarkup);
- smoothScroll();
-    // const isLArrLengLessFourty = data.hits.length < imageApi.per_page;
+    lightbox.refresh();
+    smoothScroll();
+    // const isArrLengLessFourty = data.hits.length < imageApi.per_page;
     //    if (data.hits.length < imageApi.per_page)
-
     const allHitsAmountOnThePage = imageApi.per_page * imageApi.page;
-    // console.log(allHitsAmountOnThePage);
     if (data.totalHits <= allHitsAmountOnThePage) {
       notifyEndInfo();
       hideLoadMore();
@@ -97,8 +87,3 @@ async function onLoadMore() {
   }
 }
 refs.btnLoadMoreEl.addEventListener('click', onLoadMore);
-
-//?сет интервал / таймаут на сабмит по кнопке щоб заборонити повторні запити на те саме
-//?нотифікаця забирається по кліку/ через якийсь час
-//послідовність інструкцій ??
-//рефакторинг onSubmit
